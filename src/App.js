@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/footer";
+import Main from "./components/Main/main";
+import FAQ from "./components/Layout/FAQ/FAQ";
+import Liquidity from "./components/Layout/Liquidity/Liquidity";
+import "./style.scss";
+import { ModalProvider } from "./contexts";
+import Modal from "./components/Modal/Modal";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ModalProvider>
+        <BrowserRouter>
+          <div className="page-content">
+            <div className="content-wrap">
+              <Header />
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/FAQ" element={<FAQ />} />
+                <Route path="/liquidity" element={<Liquidity />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </ModalProvider>
     </div>
   );
 }
